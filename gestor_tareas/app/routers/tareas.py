@@ -122,3 +122,17 @@ def get_tareas(db: Session = Depends(database.get_db), current_user: User = Depe
 @router.post("/tareas", response_model=schemas.Task)
 def create_tarea(tarea: schemas.TaskCreate, db: Session = Depends(database.get_db), current_user: User = Depends(get_current_user)):
     return crud.create_task(db=db, tarea=tarea, user_id=current_user.id)
+
+@router.delete("/tasks/{task_id}")
+def delete_task(task_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    return crud.delete_task(db, task_id, current_user.id)
+
+@router.put("/tareas/{task_id}", response_model=schemas.Task)
+def update_tarea(
+    task_id: int, 
+    tarea: schemas.TaskCreate, 
+    db: Session = Depends(database.get_db), 
+    current_user: User = Depends(get_current_user)
+):
+    return crud.update_task(db=db, task_id=task_id, tarea=tarea, user_id=current_user.id)
+    

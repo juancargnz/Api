@@ -1,11 +1,12 @@
 # Funciones CRUD
 from sqlalchemy.orm import Session
 from app.models import User
-from app.schemas import UserCreate
+from app.schemas import UserCreate, TaskCreate
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from app.models import Task
 from . import models, schemas
+from fastapi import HTTPException
 
 
 def get_tasks(db: Session, user_id: int):
@@ -39,3 +40,28 @@ def create_task(db: Session, tarea: schemas.TaskCreate, user_id: int):
     db.refresh(db_task)
     return db_task
     
+# Eliminar una tarea
+def delete_task(db: Session, task_id: int, user_id: int):
+    task = db.query(Task).filter(Task.id == task_id, Task.user_id == user_id).first()
+    if not task:
+        raise HTTPException(status_code=404, detail="Tarea no encontrada")
+    db.delete(task)
+    db.commit()
+    return {"message": "Tarea eliminada correctamente"}
+
+def update_task(db: Session, task_id: int, tarea: schemas.TaskCreate, user_id: int):
+    # Buscar la tarea en la base de datos
+    task = db.query(Task).filter(Task.id == task_id, Task.user_id == user_id).first()
+    
+    if not task:
+        raise HTTPException(status_code=404, detail="Tarea no encontrada")
+    
+    # Actualizar los campos de la tarea
+    task.title = tarea.title
+    task.description = tarea.description
+    task.state = tarea.state
+
+    # Guardar los cambios en la base de datos
+    db.commit()
+    db.refresh(task)
+    return task

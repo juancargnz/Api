@@ -31,4 +31,5 @@ class User(UserBase):
     tasks: List[Task] = []
     class Config:
         orm_mode = True
-
+class TaskDelete(BaseModel):
+    task_id: int

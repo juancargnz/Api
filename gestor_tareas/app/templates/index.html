@@ -1,1 +1,48 @@
-<!-- Plantilla de inicio HTML -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>{{ title }}</h1>
+    </header>
+
+    <main>
+        <h2>{{content}}</h2>
+        <a href="{{tareas_url}}" id="ver-tareas">Ver Tareas</a>
+        <!-- Verificar si el token existe en el almacenamiento local -->
+        <script>
+            function getToken() {
+                return localStorage.getItem('token');
+            }
+
+            // Si hay un token, redirigir al usuario a la ruta /tareas
+            function redirigirTareas() {
+                const token = getToken();
+                if (!token) {
+                    alert("Usuario no autenticado");
+                    return;
+                }
+                
+                // Redirige a /tareas con el token en el header Authorization
+                window.location.href = "/tareas";
+            }
+
+            // Llamar a redirigirTareas cuando el usuario hace clic en el enlace
+            document.getElementById("ver-tareas").addEventListener("click", redirigirTareas);
+        </script>
+
+        <!-- Enlace que llama a la función de redirigir a tareas -->
+        
+    </main>
+
+    <footer>
+        <p>© 2025 Gestor de Tareas</p>
+    </footer>
+</body>
+</html>
+

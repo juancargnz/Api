@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form id="login-form" method="post">
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Iniciar sesión</button>
+    </form>
+
+    <script>
+        // Enviar el formulario de login
+        document.getElementById('login-form').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Evitar la recarga de la página
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Realizar el login mediante fetch
+            const response = await fetch('/login', {
+                method: 'POST',
+                body: new URLSearchParams({ username, password }),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const token = data.token;
+
+                // Guardar el token en sessionStorage
+                sessionStorage.setItem('token', token);
+
+                // Redirigir a la página de tareas
+                window.location.href = '/tareas';
+            } else {
+                alert('Credenciales incorrectas');
+            }
+        });
+    </script>
+</body>
+</html>
