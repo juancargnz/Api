@@ -10,6 +10,7 @@ from fastapi import HTTPException
 
 
 def get_tasks(db: Session, user_id: int):
+    print(db.query(Task).filter(Task.user_id == user_id))
     return db.query(Task).filter(Task.user_id == user_id).all()
 
 # Crea un contexto para la encriptación de contraseñas

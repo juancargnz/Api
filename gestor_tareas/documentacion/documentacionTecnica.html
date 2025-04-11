@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentación API - FastAPI</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; background-color: #f9f9f9; color: #333; }
+        h1, h2, h3 { color: #2c3e50; }
+        code { background-color: #eee; padding: 2px 4px; border-radius: 4px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 4px; overflow-x: auto; }
+        .endpoint { margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+
+<h1>📄 DOCUMENTACIÓN DE API - FASTAPI</h1>
+<p>Esta documentación corresponde a los endpoints disponibles en una API construida con FastAPI.</p>
+
+<h2>🔐 AUTENTICACIÓN</h2>
+
+<div class="endpoint">
+    <h3>🔷 GET /login</h3>
+    <p><strong>Descripción:</strong> Endpoint público para probar acceso.</p>
+    <pre>{
+  "message": "Te enseña el login"
+}</pre>
+</div>
+
+<div class="endpoint">
+    <h3>🟩 POST /login</h3>
+    <p><strong>Descripción:</strong> Endpoint para autenticarse.</p>
+    <pre>{
+  "username": "string",
+  "password": "string"
+}</pre>
+    <p><strong>Respuesta:</strong></p>
+    <pre>{
+  "message": "Te redirige a la página Index"
+}</pre>
+</div>
+
+<h2>🌐 GENERAL</h2>
+
+<div class="endpoint">
+    <h3>🔷 GET /index/</h3>
+    <p><strong>Descripción:</strong> Retorna mensaje de bienvenida.</p>
+    <pre>{
+  "message": "Bienvenido {Nombre de usuario},al Gestor de Tareas"
+}</pre>
+</div>
+
+<h2>📅 TAREAS</h2>
+
+<div class="endpoint">
+    <h3>🔷 GET /tareas</h3>
+    <p><strong>Descripción:</strong> Muestra todas las tareas registradas.</p>
+    <pre>{
+  "tareas": []
+}</pre>
+</div>
+
+<div class="endpoint">
+    <h3>🟩 POST /tareas</h3>
+    <p><strong>Descripción:</strong> Crea una nueva tarea.</p>
+    <pre>{
+  "title": "string",
+  "description": "string"
+  "state": "string"
+}</pre>
+    <p><strong>Respuesta:</strong></p>
+    <pre>{
+  "message": "Tarea creada",
+  "tarea": {
+    "id": [id],
+    "titulo": "string",
+    "descripcion": "string"
+  }
+}</pre>
+</div>
+
+<div class="endpoint">
+    <h3>🟧 PUT /tareas/{tarea_id}</h3>
+    <p><strong>Descripción:</strong> Actualiza una tarea existente.</p>
+    <pre>{
+    "title": "string",
+    "description": "string"
+    "state": "string"
+}</pre>
+    <p><strong>Respuesta:</strong></p>
+    <pre>{
+  "message": "Tarea actualizada",
+  "tarea": {
+    "id": [id],
+    "title": "string",
+    "description": "string"
+    "state": "string"
+  }
+}</pre>
+</div>
+
+<div class="endpoint">
+    <h3>🟥 DELETE /tareas/{tarea_id}</h3>
+    <p><strong>Descripción:</strong> Elimina una tarea por ID.</p>
+    <p><strong>Respuesta:</strong></p>
+    <pre>{
+  "message": "Tarea eliminada",
+  "tarea": {
+    "id": [id],
+    "title": "string",
+    "description": "string"
+    "state": "string"
+  }
+}</pre>
+</div>
+
+<h2>📄 ESQUEMAS DE DATOS (Schemas)</h2>
+
+<pre>User
+{
+  "username": "string",
+  "password": "string"
+  "tasks" : "foreign-key"
+}
+
+Tasks
+{
+  "title": "string",
+  "description": "string"
+  "state": "string"
+}
+
+TaskUpdate
+Igual que Task.
+
+ValidatedTask
+from pydantic import BaseModel
+
+class ValidatedTask(BaseModel):
+    titulo: str
+    descripcion: str
+</pre>
+
+<h2>🔍 OBSERVACIONES</h2>
+<ul>
+    <li>Todos los endpoints devuelven datos en formato JSON.</li>
+    <li>Las respuestas exitosas tienen código 200.</li>
+    <li>En caso de errores de validación, se retorna 401.</li>
+</ul>
+
+<p><em>Documentación generada a partir de Swagger UI (FastAPI).</em></p>
+
+</body>
+</html>

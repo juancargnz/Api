@@ -6,7 +6,7 @@ from app import crud  # Asegúrate de importar crud correctamente
 db = SessionLocal()
 
 # Define un usuario que deseas agregar
-new_user = UserCreate(username="usuario1", password="disofic")
+new_user = UserCreate(username="usuario2", password="1234")
 
 # Llama a la función para agregar el usuario a la base de datos
 created_user = crud.create_user(db=db, user=new_user)

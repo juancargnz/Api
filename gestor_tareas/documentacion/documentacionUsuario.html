@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Rápida de Uso - API de Tareas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2 {
+            color: #007BFF;
+        }
+        h3 {
+            color: #555;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .route {
+            font-weight: bold;
+        }
+        .response {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Guía Rápida de Uso - API de Tareas (FastAPI)</h1>
+
+    <section class="section">
+        <h2>🔐 Acceso</h2>
+        <p><strong>Iniciar sesión</strong></p>
+        <p><span class="route">Ruta:</span> <code>/login</code></p>
+        <p>🧾 ¿Qué necesitas? Tu nombre de usuario y contraseña.</p>
+        <p>✅ Si todo está bien, te redirige a index.</p>
+    </section>
+
+    <section class="section">
+        <h2>📌 Funcionalidades disponibles</h2>
+
+        <h3>✅ Ver mensaje de bienvenida</h3>
+        <p><span class="route">Ruta:</span> <code>/index/</code></p>
+    </section>
+
+    <section class="section">
+        <h2>📋 Tareas</h2>
+
+        <h3>👀 Ver todas las tareas</h3>
+        <p><span class="route">Ruta:</span> <code>/tareas</code></p>
+        <p>🔎 Muestra la lista completa de tareas que has registrado.</p>
+
+        <h3>➕ Crear una tarea</h3>
+        <p><span class="route">Ruta:</span> <code>/tareas/crear_tarea</code></p>
+        <p>✍️ ¿Qué debes enviar?</p>
+        <ul>
+            <li><strong>Título</strong> de la tarea</li>
+            <li><strong>Descripción</strong> de lo que tienes que hacer</li>
+            <li><strong>Estado:</strong>Pendiente,Hecho,En proceso</li>
+        </ul>
+        <p>✅ Respuesta: Te confirma que la tarea fue creada.</p>
+
+        <h3>✏️ Editar una tarea</h3>
+        <p><span class="route">Ruta:</span> <code>/tareas/{id}</code></p>
+        <p>🧾 ¿Qué necesitas?</p>
+        <ul>
+            <li>El número de la tarea (ID)</li>
+            <li>El nuevo título y descripción</li>
+        </ul>
+        <p>✅ Respuesta: Muestra que fue actualizada correctamente.</p>
+
+        <h3>❌ Eliminar una tarea</h3>
+        <p><span class="route">Ruta:</span> <code>/tareas/{id}</code></p>
+        <p>🧾 ¿Qué necesitas?</p>
+        <ul>
+            <li>El id de la tarea que deseas eliminar</li>
+        </ul>
+        <p>✅ Respuesta: Muestra que la tarea fue eliminada.</p>
+    </section>
+
+    <section class="section">
+        <h2>ℹ️ Información adicional</h2>
+        <p>- Todas las respuestas vienen en formato fácil de leer (JSON).</p>
+        <p>- Si te equivocas al escribir algo, la API te avisa.</p>
+    </section>
+
+</body>
+</html>
